@@ -1,5 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
+import packageRoutes from './routes/packages.routes';
+import { logger } from './utils/logger';
 
 const app = express();
 
@@ -19,10 +21,20 @@ app.get('/api/health', (req, res) => {
 });
 
 // API routes
+app.use('/api/packages', packageRoutes);
 
 // 404 handler
 app.use((req, res) => {
     res.status(404).json({ error: 'API route not found' });
+});
+
+// Error handling
+app.use((error: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    logger.error('Unhandled error:', error);
+    res.status(500).json({
+      error: 'Internal server error',
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
+    });
 });
 
 export default app;
