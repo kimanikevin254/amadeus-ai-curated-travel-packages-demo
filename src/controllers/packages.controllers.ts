@@ -5,8 +5,6 @@ import { logger } from '../utils/logger';
 export class PackagesController {
     async createPackage(req: Request, res: Response): Promise<any> {
         try {
-            console.log('Body', req.body);
-
             // Validate required fields
             const { origin, destination, departureDate, adults, travelStyle } = req.body;
 
@@ -16,8 +14,6 @@ export class PackagesController {
                 });
                 return;
             }
-
-            console.log('Body', req.body);
 
             // Build search params
             const searchParams: any = {
