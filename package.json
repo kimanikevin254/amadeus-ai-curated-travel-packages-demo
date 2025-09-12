@@ -1,0 +1,24 @@
+{
+   "name": "amadeus-ai-curated-travel-packages",
+   "version": "0.0.1",
+   "description": "AI Curated Travel Packages with Amadeus and OpenAI.",
+   "type": "commonjs",
+   "devDependencies": {
+      "@types/express": "^5.0.3",
+      "@types/morgan": "^1.9.10",
+      "@types/node": "^22.13.10",
+      "nodemon": "^3.1.10",
+      "ts-node": "^10.9.2",
+      "typescript": "^5.8.2"
+   },
+   "dependencies": {
+      "@dotenvx/dotenvx": "^1.49.0",
+      "amadeus": "^11.0.0",
+      "express": "^5.1.0",
+      "morgan": "^1.10.1",
+      "openai": "^5.20.1"
+   },
+   "scripts": {
+      "dev": "nodemon src/server.ts"
+   }
+}
