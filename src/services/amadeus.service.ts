@@ -28,6 +28,34 @@ export class AmadeusService {
             throw new Error('Flight search failed');
         }
     }
+
+    async searchHotels(destination: string, checkInDate: string, checkOutDate?: string) {
+        try {
+            // First, get hotel IDs in the traveller's destination
+            const hotelIds = await amadeus.referenceData.locations.hotels.byCity.get({
+                cityCode: destination,
+            });
+
+            if (!hotelIds.data || hotelIds.data.length === 0) {
+                return [];
+            }
+
+            // Get hotel IDs for the first 3 hotels
+            const selectedHotelIds = hotelIds.data.slice(0, 3).map((hotel: any) => hotel.hotelId).join(',');
+
+            // Now, search for hotel offers using the retrieved hotel IDs
+            const response = await amadeus.shopping.hotelOffersSearch.get({
+                hotelIds: selectedHotelIds,
+                checkInDate: checkInDate,
+                checkOutDate: checkOutDate,
+            });
+
+            return response.data;
+        } catch (error) {
+            logger.error('Hotel search failed', error);
+            throw new Error('Hotel search failed');
+        }
+    }
 }
 
 export const amadeusService = new AmadeusService();

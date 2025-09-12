@@ -5,9 +5,14 @@ import { amadeusService } from "./amadeus.service";
 export class PackagingService {
     async createTravelPackage(searchParams: SearchParams): Promise<any> {
         try {
-            // Fetch flights
             const flights = await amadeusService.searchFlights(searchParams);
-            return { flights  };
+            const hotels = await amadeusService.searchHotels(
+                searchParams.destination, 
+                searchParams.departureDate, 
+                searchParams.returnDate
+            );
+            // console.log('data', { flights, hotels });
+            return { flights, hotels  };
         } catch (error) {
             logger.error('Failed to create travel package', error);
             throw new Error('Failed to create travel package');
