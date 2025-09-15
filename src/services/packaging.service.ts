@@ -1,6 +1,7 @@
 import { SearchParams } from "../types/travel.types";
 import { logger } from "../utils/logger";
 import { amadeusService } from "./amadeus.service";
+import { openAIService } from "./openai.service";
 
 export class PackagingService {
     async createTravelPackage(searchParams: SearchParams): Promise<any> {
@@ -18,8 +19,14 @@ export class PackagingService {
                     searchParams.destinationLongitude
                 )
             ]);
-            
-            return { flights, hotels, activities  };
+
+            // Generate AI recommendation based on available options
+            const aiRecommendation = await openAIService.generateTravelRecommendation(
+                searchParams,
+                { flights, hotels, activities }
+            )
+
+            return { flights, hotels, activities, aiRecommendation  };
         } catch (error) {
             logger.error('Failed to create travel package', error);
             throw new Error('Failed to create travel package');
