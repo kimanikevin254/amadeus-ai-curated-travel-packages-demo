@@ -12,6 +12,7 @@ export interface SearchParams {
     adults: number;
     budget?: number;
     travelStyle: 'luxury' | 'budget' | 'family' | 'adventure' | 'business';
+    interests?: string[];
 }
 
 export interface FlightOffer {

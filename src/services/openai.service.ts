@@ -26,7 +26,7 @@ RESPONSE FORMAT:
 1. **Personal Welcome** (2-3 sentences tailored to their style)
 2. **Flight Recommendation** (pick the best option with clear reasoning)
 3. **Hotel Recommendation** (pick the best option with clear reasoning)
-4. **Activity Recommendations** (pick 2-3 activities with clear reasoning)
+4. **Activity Recommendations** (pick 2-3 activities that fit their interests and style)
 5. **Suggested Itinerary** (day-by-day outline)
 6. **Budget Breakdown** (transparent cost analysis)
 7. **Pro Tips** (2-3 insider tips for their destination)
@@ -53,6 +53,7 @@ GUIDELINES:
 **Traveler Profile:**
 - Destination: ${userPreferences.destination.iataCode}
 - Travel Style: ${userPreferences.travelStyle}
+- Interests: ${userPreferences.interests ? userPreferences.interests.join(', ') : 'Not specified'}
 - Budget: ${userPreferences.budget ? `$${userPreferences.budget}` : 'Not specified'}
 - Duration: ${userPreferences.returnDate ? `${userPreferences.departureDate} to ${userPreferences.returnDate}` : `Open`}
 - Group Size: ${userPreferences.adults} adult(s)
