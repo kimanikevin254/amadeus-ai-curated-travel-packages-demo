@@ -116,7 +116,7 @@ export default function Home() {
           <div className="flex flex-col items-center justify-center py-20">
             <LoadingSpinner size="lg" />
             <h3 className="text-lg font-semibold text-gray-700 mt-4">Searching for your perfect trip...</h3>
-            <p className="text-gray-500 mt-2">Our AI is analyzing thousands of options to create your personalized package</p>
+            <p className="text-gray-500 mt-2">Our AI is analyzing available options to create your personalized package</p>
           </div>
         )}
 
