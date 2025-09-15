@@ -7,7 +7,7 @@ export class AmadeusService {
         try {
             const params = {
                 originLocationCode: searchParams.origin,
-                destinationLocationCode: searchParams.destination,
+                destinationLocationCode: searchParams.destination.iataCode,
                 departureDate: searchParams.departureDate,
                 adults: searchParams.adults,
             };

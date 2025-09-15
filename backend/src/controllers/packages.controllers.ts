@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { packagingService } from '../services/packaging.service';
 import { logger } from '../utils/logger';
-import { Activity, FlightOffer, HotelOffer } from '../types/travel.types';
+import { Activity, FlightOffer, HotelOffer, SearchParams } from '../types/travel.types';
 
 export class PackagesController {
     async createPackage(req: Request, res: Response): Promise<{
@@ -15,21 +15,22 @@ export class PackagesController {
     } | void> {
         try {
             // Validate required fields
-            const { origin, destination, destinationLatitude, destinationLongitude, departureDate, adults, travelStyle } = req.body;
+            const { origin, destination, departureDate, adults, travelStyle } = req.body;
 
-            if (!origin || !destination || !destinationLatitude || !destinationLongitude || !departureDate || !adults || !travelStyle ) {
+            if (!origin || !destination.iataCode || !destination.latitude || !destination.longitude || !departureDate || !adults || !travelStyle ) {
                     res.status(400).json({
-                    error: 'Missing required fields: origin, destination, destinationLatitude, destinationLongitude, departureDate, adults, travelStyle'
-                });
+                        success: false,
+                        error: {
+                            message: 'Missing required fields: origin, destination.iatacode, destination.latitude, destination.longitude, departureDate, adults, travelStyle',
+                        }
+                    });
                 return;
             }
 
             // Build search params
-            const searchParams: any = {
+            const searchParams: SearchParams = {
                 origin,
                 destination,
-                destinationLatitude,
-                destinationLongitude,
                 departureDate,
                 adults,
                 travelStyle
