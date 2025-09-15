@@ -5,16 +5,20 @@ import { amadeusService } from "./amadeus.service";
 export class PackagingService {
     async createTravelPackage(searchParams: SearchParams): Promise<any> {
         try {
-            const flights = await amadeusService.searchFlights(searchParams);
-            const hotels = await amadeusService.searchHotels(
-                searchParams.destination, 
-                searchParams.departureDate, 
-                searchParams.returnDate
-            );
-            const activities = await amadeusService.searchActivities(
-                searchParams.destinationLatitude, 
-                searchParams.destinationLongitude
-            );
+            // Fetch flights, hotels, and activities concurrently
+            const [flights, hotels, activities] = await Promise.all([
+                amadeusService.searchFlights(searchParams),
+                amadeusService.searchHotels(
+                    searchParams.destination, 
+                    searchParams.departureDate, 
+                    searchParams.returnDate
+                ),
+                amadeusService.searchActivities(
+                    searchParams.destinationLatitude, 
+                    searchParams.destinationLongitude
+                )
+            ]);
+            
             return { flights, hotels, activities  };
         } catch (error) {
             logger.error('Failed to create travel package', error);
