@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import packageRoutes from './routes/packages.routes';
+import citySearchRoutes from './routes/city-search.routes';
 import { logger } from './utils/logger';
 
 const app = express();
@@ -21,6 +22,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // API routes
+app.use('/api/city-search', citySearchRoutes);
 app.use('/api/packages', packageRoutes);
 
 // 404 handler

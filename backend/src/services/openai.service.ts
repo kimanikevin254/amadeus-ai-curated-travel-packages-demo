@@ -1,5 +1,5 @@
 import { openai, OPENAI_CONFIG } from "../config/openai";
-import { FlightOffer, SearchParams } from "../types/travel.types";
+import { FlightOffer, SearchParams } from "../types";
 import { logger } from "../utils/logger";
 
 export class OpenAIService {

@@ -1,3 +1,18 @@
+export interface CitySearch {
+    type: string;
+    subType: string;
+    name: string;
+    iataCode: string;
+    address: {
+        countryCode: string;
+        stateCode?: string;
+    };
+    geoCode: {
+        latitude: number;
+        longitude: number;
+    }
+}
+
 export interface SearchParams {
     origin: {
         iataCode: string;

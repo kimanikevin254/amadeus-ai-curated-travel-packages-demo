@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { packagingService } from '../services/packaging.service';
 import { logger } from '../utils/logger';
-import { Activity, FlightOffer, HotelOffer, SearchParams } from '../types/travel.types';
+import { Activity, FlightOffer, HotelOffer, SearchParams } from '../types';
 
 export class PackagesController {
     async createPackage(req: Request, res: Response): Promise<{
@@ -56,7 +56,7 @@ export class PackagesController {
             
             res.status(500).json({
                 error: 'Failed to create travel package',
-                message: error instanceof Error ? error.message : 'Unknown error'
+                message: 'Failed to create travel package',
             });
         }
     }

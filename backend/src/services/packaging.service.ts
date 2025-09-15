@@ -1,4 +1,4 @@
-import { SearchParams } from "../types/travel.types";
+import { SearchParams } from "../types";
 import { logger } from "../utils/logger";
 import { amadeusService } from "./amadeus.service";
 import { openAIService } from "./openai.service";
