@@ -6,11 +6,11 @@ export class PackagesController {
     async createPackage(req: Request, res: Response): Promise<any> {
         try {
             // Validate required fields
-            const { origin, destination, departureDate, adults, travelStyle } = req.body;
+            const { origin, destination, destinationLatitude, destinationLongitude, departureDate, adults, travelStyle } = req.body;
 
-            if (!origin || !destination || !departureDate || !adults || !travelStyle) {
-                res.status(400).json({
-                error: 'Missing required fields: origin, destination, departureDate, adults, travelStyle'
+            if (!origin || !destination || !destinationLatitude || !destinationLongitude || !departureDate || !adults || !travelStyle ) {
+                    res.status(400).json({
+                    error: 'Missing required fields: origin, destination, destinationLatitude, destinationLongitude, departureDate, adults, travelStyle'
                 });
                 return;
             }
@@ -19,6 +19,8 @@ export class PackagesController {
             const searchParams: any = {
                 origin,
                 destination,
+                destinationLatitude,
+                destinationLongitude,
                 departureDate,
                 adults,
                 travelStyle

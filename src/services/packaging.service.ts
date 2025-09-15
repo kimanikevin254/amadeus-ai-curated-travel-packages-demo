@@ -11,8 +11,11 @@ export class PackagingService {
                 searchParams.departureDate, 
                 searchParams.returnDate
             );
-            // console.log('data', { flights, hotels });
-            return { flights, hotels  };
+            const activities = await amadeusService.searchActivities(
+                searchParams.destinationLatitude, 
+                searchParams.destinationLongitude
+            );
+            return { flights, hotels, activities  };
         } catch (error) {
             logger.error('Failed to create travel package', error);
             throw new Error('Failed to create travel package');

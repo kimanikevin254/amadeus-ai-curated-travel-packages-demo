@@ -1,6 +1,8 @@
 export interface SearchParams {
     origin: string;
     destination: string;
+    destinationLongitude: number;
+    destinationLatitude: number;
     departureDate: string;
     returnDate?: string;
     adults: number;

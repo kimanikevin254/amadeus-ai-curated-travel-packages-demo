@@ -56,6 +56,20 @@ export class AmadeusService {
             throw new Error('Hotel search failed');
         }
     }
+
+    async searchActivities(latitude: number, longitude: number) {
+        try {
+            const response = await amadeus.shopping.activities.get({
+                latitude,
+                longitude,
+            });
+
+            return response.data
+        } catch (error) {
+            logger.error('Activity search failed', error);
+            throw new Error('Activity search failed');
+        }
+    }
 }
 
 export const amadeusService = new AmadeusService();
