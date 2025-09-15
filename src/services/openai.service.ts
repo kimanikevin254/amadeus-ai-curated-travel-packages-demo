@@ -51,7 +51,7 @@ GUIDELINES:
         try {
             const userPrompt = `Create a personalized travel package for:
 **Traveler Profile:**
-- Destination: ${userPreferences.destination}
+- Destination: ${userPreferences.destination.iataCode}
 - Travel Style: ${userPreferences.travelStyle}
 - Budget: ${userPreferences.budget ? `$${userPreferences.budget}` : 'Not specified'}
 - Duration: ${userPreferences.returnDate ? `${userPreferences.departureDate} to ${userPreferences.returnDate}` : `Open`}

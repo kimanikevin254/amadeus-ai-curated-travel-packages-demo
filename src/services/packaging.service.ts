@@ -10,13 +10,13 @@ export class PackagingService {
             const [flights, hotels, activities] = await Promise.all([
                 amadeusService.searchFlights(searchParams),
                 amadeusService.searchHotels(
-                    searchParams.destination, 
+                    searchParams.destination.iataCode, 
                     searchParams.departureDate, 
                     searchParams.returnDate
                 ),
                 amadeusService.searchActivities(
-                    searchParams.destinationLatitude, 
-                    searchParams.destinationLongitude
+                    searchParams.destination.latitude, 
+                    searchParams.destination.longitude
                 )
             ]);
 
