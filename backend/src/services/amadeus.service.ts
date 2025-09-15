@@ -104,7 +104,8 @@ export class AmadeusService {
                 longitude,
             });
 
-            return response.data.map((activity: Activity) => ({
+            // Limit to top 10 activities and
+            return response.data.slice(0, 10).map((activity: Activity) => ({
                 id: activity.id,
                 name: activity.name,
                 shortDescription: activity.shortDescription,
