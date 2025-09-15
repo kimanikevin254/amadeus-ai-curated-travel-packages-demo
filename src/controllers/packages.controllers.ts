@@ -1,9 +1,18 @@
 import { Request, Response } from 'express';
 import { packagingService } from '../services/packaging.service';
 import { logger } from '../utils/logger';
+import { Activity, FlightOffer, HotelOffer } from '../types/travel.types';
 
 export class PackagesController {
-    async createPackage(req: Request, res: Response): Promise<any> {
+    async createPackage(req: Request, res: Response): Promise<{
+        success: boolean;
+        data: {
+            flights: FlightOffer[];
+            hotels: HotelOffer[];
+            activities: Activity[];
+            aiRecommendation: string;
+        }
+    } | void> {
         try {
             // Validate required fields
             const { origin, destination, destinationLatitude, destinationLongitude, departureDate, adults, travelStyle } = req.body;
