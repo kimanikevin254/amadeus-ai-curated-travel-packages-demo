@@ -61,17 +61,17 @@ GUIDELINES:
 **Available Options:**
 
 **FLIGHTS:**
-${availableOptions.flights.map(flight => 
+${availableOptions.flights?.map(flight => 
   `• $${flight.price.total} - ${flight.itineraries[0]?.duration} - Carrier: ${flight.itineraries[0]?.segments[0]?.carrierCode}`
 ).join('\n')}
 
 **HOTELS:**
-${availableOptions.hotels.map(hotel => 
+${availableOptions.hotels?.map(hotel => 
   `• ${hotel.hotel.name} (${hotel.hotel.rating || 'N/A'}⭐) - from $${hotel.offers[0]?.price.total}`
 ).join('\n')}
 
 **ACTIVITIES:**
-${availableOptions.activities.slice(0, 8).map(activity => 
+${availableOptions.activities?.slice(0, 8)?.map(activity => 
   `• ${activity.name} - $${activity.price.amount} ${activity.rating ? `(${activity.rating}⭐)` : ''}`
 ).join('\n')}
 

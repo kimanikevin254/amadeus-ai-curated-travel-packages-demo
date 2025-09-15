@@ -1,10 +1,13 @@
 import express from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 import packageRoutes from './routes/packages.routes';
 import citySearchRoutes from './routes/city-search.routes';
 import { logger } from './utils/logger';
 
 const app = express();
+
+app.use(cors())
 
 // Body parsing
 app.use(express.json());

@@ -4,6 +4,7 @@
    "description": "AI Curated Travel Packages with Amadeus and OpenAI.",
    "type": "commonjs",
    "devDependencies": {
+      "@types/cors": "^2.8.19",
       "@types/express": "^5.0.3",
       "@types/morgan": "^1.9.10",
       "@types/node": "^22.13.10",
@@ -14,6 +15,7 @@
    "dependencies": {
       "@dotenvx/dotenvx": "^1.49.0",
       "amadeus": "^11.0.0",
+      "cors": "^2.8.5",
       "express": "^5.1.0",
       "morgan": "^1.10.1",
       "openai": "^5.20.1"

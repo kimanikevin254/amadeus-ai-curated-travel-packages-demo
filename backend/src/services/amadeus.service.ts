@@ -10,7 +10,7 @@ export class AmadeusService {
                 max: 10,
             });
 
-            return response.data;
+            return response.data || [];
         } catch (error) {
             logger.error('City search failed', error);
             throw new Error('City search failed');
@@ -20,7 +20,7 @@ export class AmadeusService {
     async searchFlights(searchParams: SearchParams): Promise<FlightOffer[]> {
         try {
             const params = {
-                originLocationCode: searchParams.origin,
+                originLocationCode: searchParams.origin.iataCode,
                 destinationLocationCode: searchParams.destination.iataCode,
                 departureDate: searchParams.departureDate,
                 adults: searchParams.adults,
@@ -30,13 +30,16 @@ export class AmadeusService {
                 Object.assign(params, { returnDate: searchParams.returnDate });
             }
 
+            console.log('params', params);
+
             const response = await amadeus.shopping.flightOffersSearch.get({
                 ...params,
                 max: 5,
                 currencyCode: 'USD'
             })
 
-            return response.data.map((flight: FlightOffer) => ({
+            return response.data ?
+            response.data.map((flight: FlightOffer) => ({
                 id: flight.id,
                 oneWay: !searchParams.returnDate,
                 price: {
@@ -59,7 +62,8 @@ export class AmadeusService {
                         duration: segment.duration,
                     })),
                 })),
-            }));
+            })) :
+            [];
         } catch (error) {
             logger.error('Flight search failed', error);
             throw new Error('Flight search failed');
@@ -87,7 +91,8 @@ export class AmadeusService {
                 checkOutDate: checkOutDate,
             });
 
-            return response.data.map((hotelOffer: HotelOffer) => ({
+            return response.data ?            
+            response.data.map((hotelOffer: HotelOffer) => ({
                 hotel: {
                     hotelId: hotelOffer.hotel.hotelId,
                     name: hotelOffer.hotel.name,
@@ -104,7 +109,8 @@ export class AmadeusService {
                         description: offer.room.description,
                     },
                 })),
-            }));
+            })) :
+            [];
         } catch (error) {
             logger.error('Hotel search failed', error);
             throw new Error('Hotel search failed');
@@ -118,8 +124,9 @@ export class AmadeusService {
                 longitude,
             });
 
-            // Limit to top 10 activities and
-            return response.data.slice(0, 10).map((activity: Activity) => ({
+            // Limit to top 20 activities
+            return response.data ? 
+            response.data.slice(0, 20).map((activity: Activity) => ({
                 id: activity.id,
                 name: activity.name,
                 shortDescription: activity.shortDescription,
@@ -128,7 +135,8 @@ export class AmadeusService {
                     currencyCode: activity.price.currencyCode,
                 },
                 pictures: activity.pictures,
-            }));
+            })) : 
+            [];
         } catch (error) {
             logger.error('Activity search failed', error);
             throw new Error('Activity search failed');
