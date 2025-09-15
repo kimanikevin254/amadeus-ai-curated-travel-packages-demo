@@ -11,72 +11,56 @@ export interface SearchParams {
 }
 
 export interface FlightOffer {
-    type: string;
     id: string;
-    source: string;
-    instantTicketingRequired: boolean;
-    nonHomogeneous: boolean;
     oneWay: boolean;
-    lastTicketingDate: string;
-    lastTicketingDateTime: string;
-    numberOfBookableSeats: number;
-    itineraries: Itinerary[];
-    price: Price;
-    pricingOptions: PricingOptions;
-    validatingAirlineCodes: string[];
-    travelerPricings: TravelerPricing[];
+    price: {
+        total: string;
+        currency: string;
+    };
+    itineraries: {
+        duration: string;
+        segments: {
+            departure: {
+                iataCode: string;
+                at: string;
+            };
+            arrival: {
+                iataCode: string;
+                at: string;
+            };
+            carrierCode: string;
+            aircraft: { code: string };
+            duration: string;
+        }[];
+    }[];
 }
 
-export interface Itinerary {
-    duration: string;
-    segments: Segment[];
+export interface HotelOffer {
+    hotel: {
+        hotelId: string;
+        name: string;
+    };
+    offers: {
+        id: string;
+        price: {
+            currency: string;
+            total: string;
+        };
+        room: {
+            type: string;
+            typeEstimated: { category: string; beds: number; bedType: string; }
+            description: { text: string; }
+        };
+    }[];
 }
 
-export interface Segment {
-    departure: LocationInfo;
-    arrival: LocationInfo;
-    carrierCode: string;
-    number: string;
-    aircraft: { code: string };
-    operating?: { carrierCode: string };
-    duration: string;
+export interface Activity {
     id: string;
-    numberOfStops: number;
-    blacklistedInEU: boolean;
-}
-
-export interface LocationInfo {
-    iataCode: string;
-    terminal?: string;
-    at: string; // ISO 8601 date-time string
-}
-
-export interface Price {
-    currency: string;
-    total: string;
-    base: string;
-    fees?: { amount: string; type: string }[];
-    grandTotal?: string;
-}
-
-export interface PricingOptions {
-    fareType: string[];
-    includedCheckedBagsOnly: boolean;
-}
-
-export interface TravelerPricing {
-    travelerId: string;
-    fareOption: string;
-    travelerType: string;
-    price: Price;
-    fareDetailsBySegment: FareDetailsBySegment[];
-}
-
-export interface FareDetailsBySegment {
-    segmentId: string;
-    cabin: string;
-    fareBasis: string;
-    brandedFare?: string;
-    class: string;
-    includedCheckedBags?: { weight: number; weightUnit: string; quantity: number };
+    name: string;
+    shortDescription: string;
+    price: {
+        amount: string;
+        currencyCode: string;
+    };
+    pictures: string[];
 }
