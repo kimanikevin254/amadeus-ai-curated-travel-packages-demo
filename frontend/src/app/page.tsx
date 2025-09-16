@@ -127,7 +127,6 @@ export default function Home() {
         {results && (
           <PackageResults 
             package={results} 
-            searchParams={searchParams}
           />
         )}
       </div>

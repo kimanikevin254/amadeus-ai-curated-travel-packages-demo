@@ -51,7 +51,7 @@ export function FlightOptions({ flights }: FlightOptionsProps) {
       </h3>
       
       <div className="space-y-4">
-        {flights.slice(0, 3).map((flight) => (
+        {flights.map((flight) => (
           <div key={flight.id} className="border border-gray-200 rounded-lg p-6 hover:border-blue-300 transition-colors">
             <div className="flex justify-between items-start mb-4">
               <div className="flex items-center space-x-3">

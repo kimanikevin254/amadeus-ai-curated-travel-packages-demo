@@ -30,8 +30,6 @@ export class AmadeusService {
                 Object.assign(params, { returnDate: searchParams.returnDate });
             }
 
-            console.log('params', params);
-
             const response = await amadeus.shopping.flightOffersSearch.get({
                 ...params,
                 max: 5,

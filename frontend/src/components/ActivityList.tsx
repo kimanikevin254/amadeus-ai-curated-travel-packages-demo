@@ -55,12 +55,12 @@ export function ActivityList({ activities }: ActivityListProps) {
                 </div>
               </div>
               
-              {/* <div
+              <div
                 className="text-gray-600 text-sm mb-4 line-clamp-3"
                 dangerouslySetInnerHTML={{ 
-                  __html: activity.shortDescription.replace(/<[^>]*>/g, '') 
+                  __html: activity.shortDescription ? activity.shortDescription.replace(/<[^>]*>/g, '') : 'No description available.'
                 }}
-              /> */}
+              />
               
               <button className="w-full bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg text-sm transition-colors">
                 Learn More
