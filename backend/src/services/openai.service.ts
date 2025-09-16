@@ -84,9 +84,7 @@ ${availableOptions.flights
 ${availableOptions.hotels
     ?.map(
         (hotel) =>
-            `• ${hotel.hotel.name} (${hotel.hotel.rating || "N/A"}⭐) - from $${
-                hotel.offers[0]?.price.total
-            }`
+            `• ${hotel.hotel.name} - from $${hotel.offers[0]?.price.total}`
     )
     .join("\n")}
 
@@ -95,9 +93,7 @@ ${availableOptions.activities
     ?.slice(0, 8)
     ?.map(
         (activity) =>
-            `• ${activity.name} - $${activity.price.amount} ${
-                activity.rating ? `(${activity.rating}⭐)` : ""
-            }`
+            `• ${activity.name} - $${activity.price.amount}`
     )
     .join("\n")}
 
